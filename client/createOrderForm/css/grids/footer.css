@@ -1,0 +1,13 @@
+.container.create-order#footer-container {
+  justify-content: end;	
+  grid-template-areas:
+  "order-accept order-cancel"
+}
+
+.subitem.create-order#order-accept {
+  grid-area: order-accept;
+}
+
+.subitem.create-order#order-cancel {
+  grid-area: order-cancel;
+}

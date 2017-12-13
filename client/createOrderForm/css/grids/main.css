@@ -1,0 +1,28 @@
+.container.create-order#main-container {
+  grid-template-areas:
+  "header"
+  "order-options-container"
+  "orders"
+  "mail-options"
+  "footer";
+}
+
+.item.create-order#header {
+  grid-area: header;
+}
+
+.item.create-order#order-options-container {
+  grid-area: order-options-container;
+}
+
+.item.create-order#orders {
+  grid-area: orders;
+}
+
+.item.create-order#mail-options {
+  grid-area: mail-options;
+}
+
+.item.create-order#footer {
+  grid-area: footer;
+}

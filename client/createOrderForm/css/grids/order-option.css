@@ -1,0 +1,41 @@
+.container.create-order.order-option-select-container {
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-areas: 
+    "order-option-checkbox order-option-label order-option-select-label order-option-select";
+}
+
+.container.create-order.order-option-number-container {
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-areas: 
+    "order-option-checkbox order-option-label order-option-number-label order-option-number";
+}
+
+.subsubitem.create-order.order-option-checkbox {
+  grid-area: order-option-checkbox;
+  justify-self: end;
+}
+
+.subsubitem.create-order.order-option-label {
+  grid-area: order-option-label;
+  justify-self: start;
+}
+
+.subsubitem.create-order.order-option-select-label {
+  grid-area: order-option-select-label;
+  justify-self: end;
+}
+
+.subsubitem.create-order.order-option-select {
+  grid-area: order-option-select;
+  justify-self: start;
+}
+
+.subsubitem.create-order.order-option-number-label {
+  grid-area: order-option-number-label;
+  justify-self: end;
+}
+
+.subsubitem.create-order.order-option-number {
+  grid-area: order-option-number;
+  justify-self: start;
+}

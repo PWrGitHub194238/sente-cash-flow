@@ -1,0 +1,42 @@
+.container.create-order.order-header-container {
+  grid-template-areas:
+  "order-header-x order-header-person order-header-mealset order-header-price"
+}
+
+.subitem.create-order.order-header-x {
+  grid-area: order-header-x;
+}
+
+.subitem.create-order.order-header-person {
+  grid-area: order-header-person;
+}
+
+.subitem.create-order.order-header-mealset {
+  grid-area: order-header-mealset;
+}
+
+.subitem.create-order.order-header-price {
+  grid-area: order-header-price;
+}
+
+.container.create-order.order-pos-container {
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-areas:
+  "order-pos-x order-pos-name order-pos-quantity order-pos-price";
+}
+
+.subitem.create-order.order-pos-x {
+  grid-area: order-pos-x;
+}
+
+.subitem.create-order.order-pos-name {
+  grid-area: order-pos-name;
+}
+
+.subitem.create-order.order-pos-quantity {
+  grid-area: order-pos-quantity;
+}
+
+.subitem.create-order.order-pos-price {
+  grid-area: order-pos-price;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <script>
+    function getGoogleDriveFilePath(id){
+  return 'https://drive.google.com/uc?export=view&id=' + id;
+}
+var sss;
+function playEatSound() {
+  var eatSoundsArray = [
+    '1Lt8opB_FEVWe6nwHVQfOrnDJGdl2vOZA'
+  ];
+  return playRandomAudioSrc.apply(null, eatSoundsArray);
+}
+
+/* Odtwarza losowo wskazany dźwięk.
+*/
+function playRandomAudioSrc() {
+  var googleFileId = arguments;
+  var audioElement = document.createElement('audio');
+  var soundFileId = googleFileId[Math.floor(Math.random() * googleFileId.length)];
+  audioElement.setAttribute('src', getGoogleDriveFilePath(soundFileId)); 
+  return audioElement;
+}
+
+function tmp() {
+alert("OK");
+sss.play();
+}
+
+function initCreateOrderForm() {
+  sss = playEatSound();
+}
+
+    </script>
+    <!-- .\ZS4 CashFlow\scripts\google.js -->
+    <!-- <script type="text/javascript" src="https://drive.google.com/uc?export=view&id=1zrxzPoeQF8HCux-TVCSK5jfmIKcqVQc4" async></script> -->
+    <!-- .\ZS4 CashFlow\scripts\googleSounds.js -->
+    <!-- <script type="text/javascript" src="https://drive.google.com/uc?export=view&id=1jGhIHy34kUiKIHIuRTq3b_LdaEribFdd" async></script>-->
+    <!-- .\ZS4 CashFlow\scripts\createOrderForm.js -->
+    <!-- <script type="text/javascript" src="https://drive.google.com/uc?export=view&id=1vUh5n9Xv3JpOlA2WFmHvf841DSQfZfbL" async></script>-->
+  </head>
+  <body onLoad="javascript:initCreateOrderForm();">
+    <div class="container">
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <button onClick="javascript:tmp()">OK</button>
+    </div>
+  </body>
+</html>
+
+

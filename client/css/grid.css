@@ -1,0 +1,31 @@
+.container {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+}
+
+.item {
+    border: 1px solid red;
+    margin: 10px;
+}
+
+.subitem {
+    border: 1px solid green;
+    margin: 5px;
+}
+
+.subsubitem {
+    border: 1px solid blue;
+    margin: 2px;
+}
+
+.subsubsubitem {
+    border: 1px solid brown;
+    margin: 2px;
+}
+
+.container.item, .container.subitem {
+  display: subgrid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+}

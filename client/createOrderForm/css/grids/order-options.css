@@ -1,0 +1,23 @@
+.container.create-order#order-options-container {
+  grid-template-areas:
+  "who-order-container"
+  "is-team-order-container"
+  "is-locale-order-container"
+  "is-from-hist-order-container";
+}
+
+.subitem.create-order#who-order-container {
+  grid-area: who-order-container;
+}
+
+.subitem.create-order#is-team-order-container {
+  grid-area: is-team-order-container;
+}
+
+.itesubitemm.create-order#is-locale-order-container {
+  grid-area: is-locale-order-container;
+}
+
+.subitem.create-order#is-from-hist-order-container {
+  grid-area: is-from-hist-order-container;
+}

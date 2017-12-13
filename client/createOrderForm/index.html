@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="../css/index.css">
+  <link rel="stylesheet" type="text/css" href="../css/grid.css">
+  <link rel="stylesheet" type="text/css" href="./css//grids/main.css">
+  <link rel="stylesheet" type="text/css" href="./css//grids/order-options.css">
+  <link rel="stylesheet" type="text/css" href="./css//grids/order-option.css">
+  <link rel="stylesheet" type="text/css" href="./css//grids/orders.css">
+  <link rel="stylesheet" type="text/css" href="./css//grids/order.css">
+  <link rel="stylesheet" type="text/css" href="./css//grids/footer.css">
+  <script src="./scripts/mock.js"></script>
+  <script src="./scripts/index.js"></script>
+</head>
+
+<body onLoad="javascript:initCreateOrderForm();">
+  <div class="container create-order" id="main-container">
+    <div class="item create-order-item" id="header">
+      header
+    </div>
+    <div class="container item create-order" id="order-options-container">
+      <div class="container subitem create-order order-option-select-container" id="who-order-container">
+        <div class="subsubitem create-order order-option-checkbox" id="who-order-checkbox">
+          <input type="checkbox" id="who-order-checkbox-id">
+        </div>
+        <div class="subsubitem create-order order-option-label" id="who-order-label">
+          <label for="who-order-checkbox-id">To nie ja zamawiam.</label>
+        </div>
+        <div class="subsubitem create-order order-option-select-label" id="who-order-select-label">
+          <label>Zamawia</label>
+        </div>
+        <div class="subsubitem create-order order-option-select" id="who-order-select-div">
+          <select id="who-order-select">
+          </select>
+        </div>
+      </div>
+      <div class="container subitem create-order order-option-select-container" id="is-team-order-container">
+        <div class="subsubitem create-order order-option-checkbox" id="is-team-order-checkbox">
+          <input type="checkbox" id="is-team-order-checkbox-id">
+        </div>
+        <div class="subsubitem create-order order-option-label" id="is-team-order-label">
+          <label for="is-team-order-checkbox-id">Zamówienie zespołowe</label>
+        </div>
+        <div class="subsubitem create-order order-option-select-label" id="is-team-order-select-label-div">
+          <label>Zespół</label>
+        </div>
+        <div class="subsubitem create-order order-option-select" id="is-team-order-select-div">
+          <select id="is-team-order-select">
+          </select>
+        </div>
+      </div>
+      <div class="container subitem create-order order-option-select-container" id="is-locale-order-container">
+        <div class="subsubitem create-order order-option-checkbox" id="is-locale-order-checkbox">
+          <input type="checkbox" id="is-locale-order-checkbox-id">
+        </div>
+        <div class="subsubitem create-order order-option-label" id="is-locale-order-label">
+          <label for="is-locale-order-checkbox-id">Zamawiam z konkretnego miejsca.</label>
+        </div>
+        <div class="subsubitem create-order order-option-select-label" id="is-locale-order-select-label">
+          <label>Oferta</label>
+        </div>
+        <div class="subsubitem create-order order-option-select" id="is-locale-order-select-div">
+          <select id="is-locale-order-select">
+          </select>
+        </div>
+      </div>
+      <div class="container subitem create-order order-option-select-container" id="is-from-hist-order-container">
+        <div class="subsubitem create-order order-option-checkbox" id="is-from-hist-order-checkbox">
+          <input type="checkbox" id="is-from-hist-order-checkbox-id">
+        </div>
+        <div class="subsubitem create-order order-option-label" id="is-from-hist-order-label">
+          <label for="is-from-hist-order-checkbox-id">Zamawiam na podstawie ostatnich zamówień.</label>
+        </div>
+        <div class="subsubitem create-order order-option-select-label" id="is-from-hist-order-select-label">
+          <label>Zamówienie</label>
+        </div>
+        <div class="subsubitem create-order order-option-select" id="is-from-hist-order-select-div">
+          <select id="is-from-hist-order-select">
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="container item create-order" id="orders-container">
+    </div>
+    <div class="container item create-order" id="mail-options-container">
+      <div class="container subitem create-order order-option-select-container" id="is-send-mail-container">
+        <div class="subsubitem create-order order-option-checkbox" id="is-send-mail-checkbox">
+          <input type="checkbox" id="is-send-mail-checkbox-id">
+        </div>
+        <div class="subsubitem create-order order-option-label" id="is-send-mail-label">
+          <label for="is-send-mail-checkbox-id">Wyślij powiadomienie o zamówieniu</label>
+        </div>
+        <div class="subsubitem create-order order-option-select-label" id="is-send-mail-select-label">
+          <label>Zespół</label>
+        </div>
+        <div class="subsubitem create-order order-option-select" id="is-send-mail-select">
+          <select name="is-send-mail-select">
+            <option value="0">grupowo</option>
+            <option value="0">indywidualnie</option>
+          </select>
+        </div>
+      </div>
+      <div class="container subitem create-order order-option-number-container" id="is-remainder-mail-container">
+        <div class="subsubitem create-order order-option-checkbox" id="is-remainder-mail-checkbox">
+          <input type="checkbox" id="is-remainder-mail-checkbox-id">
+        </div>
+        <div class="subsubitem create-order order-option-label" id="is-remainder-mail-label">
+          <label for="is-remainder-mail-checkbox-id">Wyślij przypomnienie przed dostawą</label>
+        </div>
+        <div class="subsubitem create-order order-option-number-label" id="is-remainder-mail-number-label">
+          <label>za minut</label>
+        </div>
+        <div class="subsubitem create-order order-option-number" id="is-remainder-mail-number">
+          <input type="number" name="is-remainder-mail-number" step="1">
+        </div>
+      </div>
+    </div>
+    <div class="container item create-order" id="footer-container">
+      <div class="subitem create-order" id="order-accept">
+        <button name="order-accept">
+          Złóż zamówienie
+        </button>
+      </div>
+      <div class="subitem create-order" id="order-cancel">
+        <button name="order-cancel">
+          Wyjdź
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
