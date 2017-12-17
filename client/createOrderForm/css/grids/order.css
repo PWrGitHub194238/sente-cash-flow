@@ -19,7 +19,7 @@
   grid-area: order-header-price;
 }
 
-.container.create-order.order-pos-container {
+.container.create-order.order-pos-item-container {
   grid-template-columns: repeat(4, 1fr);
   grid-template-areas:
   "order-pos-x order-pos-name order-pos-quantity order-pos-price";
