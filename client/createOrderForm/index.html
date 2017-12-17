@@ -19,7 +19,16 @@
     <div class="item create-order-item" id="header">
       header
     </div>
+    <!--
+      This container holds all options/switches that affects "orders-container" div.
+      This second one holds all order positions for every person and it can be filled automatically
+      by using options in this container. 
+    -->
     <div class="container item create-order" id="order-options-container">
+      <!--
+        Determinates which person is goint to pay for order. 
+        It not necessarily have to be the same person that enters this page to create a new order.
+      -->
       <div class="container subitem create-order order-option-select-container" id="who-order-container">
         <div class="subsubitem create-order order-option-checkbox" id="who-order-checkbox">
           <input type="checkbox" id="who-order-checkbox-id">
@@ -32,9 +41,15 @@
         </div>
         <div class="subsubitem create-order order-option-select" id="who-order-select-div">
           <select id="who-order-select">
+            <!-- Dynamically filled with every person in global "people" array. -->
           </select>
         </div>
       </div>
+      <!--
+        By default to create an order, user has to manually fill "orders-container" div 
+        by adding people which are wish to make an order. If user checks this option
+        container will be automatically filled with persons that creates the selected team.
+      -->
       <div class="container subitem create-order order-option-select-container" id="is-team-order-container">
         <div class="subsubitem create-order order-option-checkbox" id="is-team-order-checkbox">
           <input type="checkbox" id="is-team-order-checkbox-id">
@@ -47,9 +62,16 @@
         </div>
         <div class="subsubitem create-order order-option-select" id="is-team-order-select-div">
           <select id="is-team-order-select">
+            <!-- Dynamically filled with every person in global "teams" array. -->
           </select>
         </div>
       </div>
+      <!--
+        After adding a person to order list user has to add some order positions for that person.
+        By checking this option user shrinks numer of avaliable mealsets/meals
+        from which user can chose from, as dropdowns will no longer show mealsets/meals 
+        that cannot be ordered from given location.
+      -->
       <div class="container subitem create-order order-option-select-container" id="is-locale-order-container">
         <div class="subsubitem create-order order-option-checkbox" id="is-locale-order-checkbox">
           <input type="checkbox" id="is-locale-order-checkbox-id">
@@ -62,9 +84,15 @@
         </div>
         <div class="subsubitem create-order order-option-select" id="is-locale-order-select-div">
           <select id="is-locale-order-select">
+            <!-- Dynamically filled with every person in global "locals" array. -->
           </select>
         </div>
       </div>
+      <!--
+        In the event of scenario that user wants to make same order as before
+        user can check this option to be albe to select one of historical orders.
+        By doing so, user make "orders-container" to be automatically filled by details of selected order.
+      -->
       <div class="container subitem create-order order-option-select-container" id="is-from-hist-order-container">
         <div class="subsubitem create-order order-option-checkbox" id="is-from-hist-order-checkbox">
           <input type="checkbox" id="is-from-hist-order-checkbox-id">
@@ -77,11 +105,18 @@
         </div>
         <div class="subsubitem create-order order-option-select" id="is-from-hist-order-select-div">
           <select id="is-from-hist-order-select">
+              <!-- Dynamically filled with every person in global "TODO" array. -->
           </select>
         </div>
       </div>
     </div>
     <div class="container item create-order" id="orders-container">
+      <!--
+        Containerwill be dynamically filled with order positions in given manner:
+        - person who want a meal,
+        - if preferred, a predefined mealset could be selected in order to partially fill
+          - positions for this person's order wich consist of single meal selection dropdown.
+      -->
     </div>
     <div class="container item create-order" id="mail-options-container">
       <div class="container subitem create-order order-option-select-container" id="is-send-mail-container">
