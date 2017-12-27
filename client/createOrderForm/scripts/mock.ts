@@ -1,6 +1,17 @@
-var myMail = "t.strzalka@sente.pl";
+var myMail : string = "t.strzalka@sente.pl";
 
-var people = [
+interface Person {
+  ref: number, 
+  email: string, 
+  fname: string, 
+  sname: string, 
+  totalSpend: number, 
+  giveTotal: number, 
+  foundCountTotal: number, 
+  orderCountTotal: number
+}
+
+var people : Person[] = [
   {
     ref: 0, 
     email: "t.strzalka@sente.pl", 
@@ -63,7 +74,14 @@ var people = [
   }
 ];
 
-var teams = [
+interface Team {
+  ref: number,
+  name: string,
+  memberCount: number,
+  members: number[]
+}
+
+var teams : Team[] = [
   {
     ref: 0,
     name: "ZS4",
@@ -84,7 +102,13 @@ var teams = [
   }
 ];
 
-var locals = [
+interface Locale {
+  ref: number,
+  name: string,
+  link: string
+}
+
+var locals : Locale[] = [
   {
     ref: 0,
     name: "Grillburger",
@@ -97,7 +121,15 @@ var locals = [
   }
 ];
 
-var meals = [
+interface Meal {
+  ref: number,
+  name: string,
+  description: string,
+  orderPlaceRef: number,
+  price: number
+}
+
+var meals: Meal[] = [
   {
     ref: 0,
     name: "Ćwiartki ziemniaków ze skórką",
@@ -128,7 +160,15 @@ var meals = [
   }
 ];
 
-var mealsets = [
+interface MealSet {
+  ref: number,
+  name: string,
+  orderPlaceRef: number,
+  mealsCount: number,
+  meals: number[]
+}
+
+var mealsets: MealSet[] = [
   {
     ref: 0,
     name: "Zestaw ala Tomek",
@@ -151,7 +191,18 @@ var mealsets = [
   }
 ];
 
-var orders = [
+interface Order {
+  ref: number,
+  data: string,
+  orderByRef: number,
+  orderForRef: number,
+  mealRef: number,
+  count: number,
+  price: number,
+  toGive: number
+}
+
+var orders : Order[] = [
   {
     ref: 0,
     data: "2017-12-06",
