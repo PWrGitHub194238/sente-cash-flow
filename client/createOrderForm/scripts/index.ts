@@ -6,7 +6,7 @@
    each with different quantity.
 
    Example:
-   var peopleToOrder = [
+   let peopleToOrder = [
     {
         person: { <person> },
         meals: [
@@ -14,12 +14,22 @@
         ]
     }];
 */
-var peopleToOrder = [];
+interface PersonOrder {
+    person: Person,
+    meals: PersonOrderMeal[]
+}
+
+interface PersonOrderMeal {
+    meal: Meal,
+    quantity: number
+}
+
+let peopleToOrder: PersonOrder[] = [];
 
 /* OnLoad function.
    Initializes all data fir createOrderForm.
 */
-function initCreateOrderForm() {
+function initCreateOrderForm(): void {
     // Creates starting DOM, sets attributes and classes for DOM elements if necessary.
     initDisplay();
     // Fills all remaining visible dropdowns on page.
@@ -31,14 +41,14 @@ function initCreateOrderForm() {
 /* Creates starting DOM.
    It sets attributes and classes for DOM elements if necessary.
 */
-function initDisplay() {
+function initDisplay(): void {
     // Set starting visibility for all page elements.
     initVisibility();
 }
 
 /* Set starting visibility for all page elements.
 */
-function initVisibility() {
+function initVisibility(): void {
     // Hides elements that are related to checkboxes 
     // where their visibility depends on these checkbox's state.
     hideCheckboxConfigs();
@@ -49,7 +59,7 @@ function initVisibility() {
    that should be visible if and only if this checkbox is checked,
    we have to hide them all (by default all checkboxes are disabled).
 */
-function hideCheckboxConfigs() {
+function hideCheckboxConfigs(): void {
     // Set visibility for "Who order" checkbox related DOM elements.
     setWhoOrderSelectVisibility(false);
     // Set visibility for "Is team order" checkbox related DOM elements.
@@ -65,13 +75,15 @@ function hideCheckboxConfigs() {
    and it's label. Elements that have "hidden" on their class list
    have their "display" attribute set to "none".
 */
-function setWhoOrderSelectVisibility(isVisible) {
+function setWhoOrderSelectVisibility(isVisible: boolean): void {
+    let div: HTMLDivElement = <HTMLDivElement>document.getElementById("who-order-select-div");
+    let divOfLabel: HTMLDivElement = <HTMLDivElement>document.getElementById("who-order-select-label-div");
     if (isVisible) {
-        document.getElementById("who-order-select-label").classList.remove("hidden");
-        document.getElementById("who-order-select-div").classList.remove("hidden");
+        div.classList.remove("hidden");
+        divOfLabel.classList.remove("hidden");
     } else {
-        document.getElementById("who-order-select-label").classList.add("hidden");
-        document.getElementById("who-order-select-div").classList.add("hidden");
+        div.classList.add("hidden");
+        divOfLabel.classList.add("hidden");
     }
 }
 
@@ -80,13 +92,15 @@ function setWhoOrderSelectVisibility(isVisible) {
    and it's label. Elements that have "hidden" on their class list
    have their "display" attribute set to "none".
 */
-function setIsTeamOrderVisibility(isVisible) {
+function setIsTeamOrderVisibility(isVisible: boolean): void {
+    let div: HTMLDivElement = <HTMLDivElement>document.getElementById("is-team-order-select-div");
+    let divOfLabel: HTMLDivElement = <HTMLDivElement>document.getElementById("is-team-order-select-label-div");
     if (isVisible) {
-        document.getElementById("is-team-order-select-label-div").classList.remove("hidden");
-        document.getElementById("is-team-order-select-div").classList.remove("hidden");
+        div.classList.remove("hidden");
+        divOfLabel.classList.remove("hidden");
     } else {
-        document.getElementById("is-team-order-select-label-div").classList.add("hidden");
-        document.getElementById("is-team-order-select-div").classList.add("hidden");
+        div.classList.add("hidden");
+        divOfLabel.classList.add("hidden");
     }
 }
 
@@ -95,13 +109,15 @@ function setIsTeamOrderVisibility(isVisible) {
    and it's label. Elements that have "hidden" on their class list
    have their "display" attribute set to "none".
 */
-function setIsLocaleOrderVisibility(isVisible) {
+function setIsLocaleOrderVisibility(isVisible: boolean): void {
+    let div: HTMLDivElement = <HTMLDivElement>document.getElementById("is-locale-order-select-div");
+    let divOfLabel: HTMLDivElement = <HTMLDivElement>document.getElementById("is-locale-order-select-label-div");
     if (isVisible) {
-        document.getElementById("is-locale-order-select-label").classList.remove("hidden");
-        document.getElementById("is-locale-order-select-div").classList.remove("hidden");
+        div.classList.remove("hidden");
+        divOfLabel.classList.remove("hidden");
     } else {
-        document.getElementById("is-locale-order-select-label").classList.add("hidden");
-        document.getElementById("is-locale-order-select-div").classList.add("hidden");
+        div.classList.add("hidden");
+        divOfLabel.classList.add("hidden");
     }
 }
 
@@ -110,26 +126,28 @@ function setIsLocaleOrderVisibility(isVisible) {
    and it's label. Elements that have "hidden" on their class list
    have their "display" attribute set to "none".
 */
-function setIsFromHistOrderVisibility(isVisible) {
+function setIsFromHistOrderVisibility(isVisible: boolean): void {
+    let div: HTMLDivElement = <HTMLDivElement>document.getElementById("is-from-hist-order-select-div");
+    let divOfLabel: HTMLDivElement = <HTMLDivElement>document.getElementById("is-from-hist-order-select-label-div");
     if (isVisible) {
-        document.getElementById("is-from-hist-order-select-label").classList.remove("hidden");
-        document.getElementById("is-from-hist-order-select-div").classList.remove("hidden");
+        div.classList.remove("hidden");
+        divOfLabel.classList.remove("hidden");
     } else {
-        document.getElementById("is-from-hist-order-select-label").classList.add("hidden");
-        document.getElementById("is-from-hist-order-select-div").classList.add("hidden");
+        div.classList.add("hidden");
+        divOfLabel.classList.add("hidden");
     }
 }
 
 /* Fills dropdowns with initial data.
 
 */
-function fillSelectMenus() {
+function fillSelectMenus(): void {
     // Fills "who-order-select" dropdown with data in global "people" array.
     fillPeopleSelectMenu();
     // Sets default person in "who-order-select" dropdown.
     // By default, this person should be the same as one logged into gmail account
     // i.e. it's mail matches.
-    setPeopleSelectValue((person) => person.email === myMail);
+    setPeopleSelectValue((person: Person) => person.email === myMail);
     // Fills "is-team-order-select" dropdown with data in global "teams" array.
     fillTeamsSelectMenu();
     // Fills "is-locale-order-select" dropdown with data in global "locals" array.
@@ -150,15 +168,16 @@ function fillSelectMenus() {
    valueFunc - callback function that determinates which field from array's item
    should be passed as inner text for <option> tag.
 */
-function fillSelectMenu(elementId, array, keyFunc, valueFunc) {
-    var options = document.createDocumentFragment();
-    array.forEach(function (item) {
-        var option = document.createElement("option");
+function fillSelectMenu(elementId: string, array: any[], 
+    keyFunc: (any) => string, valueFunc: (any) => string): void {
+    let options: DocumentFragment = document.createDocumentFragment();
+    array.forEach(function(item: any) {
+        let option: HTMLOptionElement = document.createElement("option");
         option.value = keyFunc(item);
         option.appendChild(document.createTextNode(valueFunc(item)));
         options.appendChild(option);
     });
-    document.getElementById(elementId).appendChild(options);
+    (<HTMLSelectElement>document.getElementById(elementId)).appendChild(options);
 }
 
 /* Sets an element from given array as selected option for dropdown with given id.
@@ -167,16 +186,18 @@ function fillSelectMenu(elementId, array, keyFunc, valueFunc) {
    set as dropdown's selected <option> "value" attribute.
 
    elementId - id for <select> tag for which we want to mark given <option> as selected,
-   optionarray - group of options of given dropdown,
-   filterFunction - callback that determinates whith element from given optionarray
+   optionArray - group of options of given dropdown,
+   filterFunction - callback that determinates whith element from given optionArray
    should be marked as selected for given dropdown. In case callback returns "true" for more 
-   than one element from optionarray, the first one will be selected.
+   than one element from optionArray, the first one will be selected.
 */
-function setSelectValue(elementId, optionarray, filterFunction) {
-    var arrayLength = optionarray.length;
-    for (var i = 0; i < arrayLength; i += 1) {
-        if (filterFunction(optionarray[i])) {
-            document.getElementById(elementId).value = i;
+function setSelectValue(elementId: string, optionArray: any[], 
+    filterFunction: (any) => boolean): void {
+    let arrayLength: number = optionArray.length;
+    for (let i = 0; i < arrayLength; i += 1) {
+        if (filterFunction(optionArray[i])) {
+            let selectElement : HTMLSelectElement = <HTMLSelectElement>document.getElementById(elementId);
+            selectElement.value = i.toString();
             return;
         }
     }
@@ -185,21 +206,22 @@ function setSelectValue(elementId, optionarray, filterFunction) {
 /* Gets a selected value for dropdown element with given id.
 
 */
-function getSelectValue(elementId) {
-    return document.getElementById(elementId).value;
+function getSelectValue(elementId: string): string {
+    let selectElement : HTMLSelectElement = <HTMLSelectElement>document.getElementById(elementId);
+    return selectElement.value;
 }
 
 /* Gets a selected value for "who-order-select" dropdown.
 
 */
-function getPeopleSelectValue() {
+function getPeopleSelectValue(): string {
     return getSelectValue("who-order-select");
 }
 
 /* Gets a selected value for "is-team-order-select" dropdown.
 
 */
-function getTeamsSelectValue() {
+function getTeamsSelectValue(): string {
     return getSelectValue("is-team-order-select");
 }
 
@@ -213,9 +235,9 @@ function getTeamsSelectValue() {
    have to satisfy to be returned.
 
 */
-function getArrayElement(array, filterFunction) {
-    var arrayLength = array.length;
-    for (var i = 0; i < arrayLength; i += 1) {
+function getArrayElement(array: any[], filterFunction: (any) => boolean): any {
+    let arrayLength: number = array.length;
+    for (let i = 0; i < arrayLength; i += 1) {
         if (filterFunction(array[i])) {
             return array[i];
         }
@@ -229,13 +251,14 @@ function getArrayElement(array, filterFunction) {
   of given person returned from the "people" array.
 
 */
-function fillPeopleSelectMenu() {
+function fillPeopleSelectMenu(): void {
     fillSelectMenu("who-order-select", people, 
-      function(person) {
-        return person.ref;
-      }, function(person) {
-        return person.fname + " " + person.sname;
-      });
+        function(person) {
+            return person.ref;
+        }, function(person) {
+            return person.fname + " " + person.sname;
+        }
+    );
 }
 
 /* Sets a given element as selected for the "who-order-select" dropdown.
@@ -250,7 +273,7 @@ function fillPeopleSelectMenu() {
    which will be marked as selected for given dropdown.
 
 */
-function setPeopleSelectValue(filterFunction) {
+function setPeopleSelectValue(filterFunction: (Person) => boolean): void {
     setSelectValue("who-order-select", people, filterFunction);
 }
 
@@ -260,13 +283,14 @@ function setPeopleSelectValue(filterFunction) {
   of given team returned from the "teams" array.
 
 */
-function fillTeamsSelectMenu() {
+function fillTeamsSelectMenu(): void {
     fillSelectMenu("is-team-order-select", teams, 
-    function(team) {
-      return team.ref;
-    }, function(team) {
-      return team.name;
-    });
+        function(team) {
+            return team.ref;
+        }, function(team) {
+            return team.name;
+        }
+    );
 }
 
 /* Fills the "is-locale-order-select" dropdown with data from global "locals" array.
@@ -275,13 +299,14 @@ function fillTeamsSelectMenu() {
   of given local returned from the "locals" array.
 
 */
-function fillLocalesSelectMenu() {
+function fillLocalesSelectMenu(): void {
     fillSelectMenu("is-locale-order-select", locals,
-    function(local) {
-      return local.ref;
-    }, function(local) {
-      return local.name;
-    });
+        function(local) {
+            return local.ref;
+        }, function(local) {
+            return local.name;
+        }
+    );
 }
 
 /* Fills the "is-from-hist-order-select" dropdown with data from global "orders" array.
@@ -290,13 +315,14 @@ function fillLocalesSelectMenu() {
   of given order returned from the "orders" array.
 
 */
-function fillOrdersSelectMenu() {
+function fillOrdersSelectMenu(): void {
     fillSelectMenu("is-from-hist-order-select", orders,
-    function(order) {
-      return order.ref;
-    }, function(order) {
-      return order.name;
-    });
+        function(order) {
+            return order.ref;
+        }, function(order) {
+            return order.name;
+        }
+    );
 }
 
 /* Fills dynamically created dropdown that stands for person 
@@ -313,8 +339,8 @@ function fillOrdersSelectMenu() {
    see renderOrderContainer().
 
 */
-function fillPersonSelectMenu(elementRef, personToOrderRef) {
-    var elementId = "order-header-person-select-" + elementRef;
+function fillPersonSelectMenu(elementRef: number, personToOrderRef?: number): void {
+    let elementId: string = "order-header-person-select-" + elementRef;
     fillSelectMenu(elementId, people, 
         function(person) {
             return person.ref;
@@ -341,8 +367,8 @@ function fillPersonSelectMenu(elementRef, personToOrderRef) {
    see renderOrderContainer().
 
 */
-function fillMealSetSelectMenu(elementRef, personToOrderRef) {
-    var elementId = "order-header-mealset-select-" + elementRef
+function fillMealSetSelectMenu(elementRef: number, personToOrderRef?: number): void {
+    let elementId: string = "order-header-mealset-select-" + elementRef
     fillSelectMenu(elementId, mealsets,
         function(mealset) {
             return mealset.ref;
@@ -370,9 +396,10 @@ function fillMealSetSelectMenu(elementRef, personToOrderRef) {
    see renderOrderPosItem().
 
 */
-function fillMealSelectMenu(personOrderRef, personOrderPosRef, personOrdPos) {
-    var elementId =  "order-pos-name-select-" + personOrderRef + "-" + personOrderPosRef;
-    var personOrdPosMealRef = personOrdPos.meal.ref;
+function fillMealSelectMenu(personOrderRef: number, personOrderPosRef: number, 
+    personOrdPos?: PersonOrderMeal): void {
+    let elementId: string = "order-pos-name-select-" + personOrderRef + "-" + personOrderPosRef;
+    let personOrdPosMealRef: number = personOrdPos.meal.ref;
     fillSelectMenu(elementId, meals,
         function(meal) {
             return meal.ref;
@@ -391,7 +418,7 @@ function fillMealSelectMenu(personOrderRef, personOrderPosRef, personOrdPos) {
 /* Adds all listeners to page.
 
 */
-function addListeners() {
+function addListeners(): void {
     // Runs callback if "checked" attribute of checkbox "who-order-checkbox-id" is changed.
     addWhoOrderSelectOnChangeEvent();
 
@@ -412,7 +439,7 @@ function addListeners() {
    Callback updated visibility for "Who order" checkbox related DOM elements.
 
 */
-function addWhoOrderSelectOnChangeEvent() {
+function addWhoOrderSelectOnChangeEvent(): void {
     addListener("who-order-checkbox-id", "change", function() {
         setWhoOrderSelectVisibility(this.checked);
     });
@@ -426,7 +453,7 @@ function addWhoOrderSelectOnChangeEvent() {
    based on data in that array.
 
 */
-function addIsTeamOrderOnChangeEvent() {
+function addIsTeamOrderOnChangeEvent(): void {
     addListener("is-team-order-checkbox-id", "change", function() {
         setIsTeamOrderVisibility(this.checked);
         if (this.checked) {
@@ -441,7 +468,7 @@ function addIsTeamOrderOnChangeEvent() {
    and re-render content of "orders-container" div container, based on data in that array.
 
 */
-function addTeamOrderSelectOnChangeEvent() {
+function addTeamOrderSelectOnChangeEvent(): void {
     addListener("is-team-order-select", "change", function() {
          renderOrderContainer();
     });
@@ -459,24 +486,24 @@ function addTeamOrderSelectOnChangeEvent() {
    we fill "peopleToOrder" array's ""meals" element with meal's objects.
 
 */
-function fillPeopleToOrderMealArray(orderIndex) {   
-    var personMeals = peopleToOrder[orderIndex].meals;
+function fillPeopleToOrderMealArray(orderIndex: number): void { 
+    let personMeals: PersonOrderMeal[] = peopleToOrder[orderIndex].meals;
+
     // Get index of a mealset element in "mealsets" global array, 
     // where index is selected by the user for given person's order.
     // Get array of meal's REFs from that.
-    var selectedMealSet = mealsets[getSelectValue("order-header-mealset-select-" + orderIndex)].meals;   
-    var arrayLength = selectedMealSet.length;
+    let selectedMealSet: number[] = mealsets[getSelectValue("order-header-mealset-select-" + orderIndex)].meals;   
+    let arrayLength: number = selectedMealSet.length;
 
     // We must keep reference to original array.
     personMeals.length = 0;
 
-    for (var i = 0; i < arrayLength; i += 1) {
+    for (let i = 0; i < arrayLength; i += 1) {
         personMeals.push({
             meal: meals[selectedMealSet[i]],
             quantity: 1
         });
     }
-
 }
 
 
@@ -484,7 +511,7 @@ function fillPeopleToOrderMealArray(orderIndex) {
     Callback updated visibility for "Is locale order" checkbox related DOM elements.
 
 */
-function addIsLocaleOrderOnChangeEvent() {
+function addIsLocaleOrderOnChangeEvent(): void { 
     addListener("is-locale-order-checkbox-id", "change", function() {
         setIsLocaleOrderVisibility(this.checked);
     });
@@ -494,7 +521,7 @@ function addIsLocaleOrderOnChangeEvent() {
    Callback updated visibility for "Is from hist order" checkbox related DOM elements.
 
 */
-function addIsFromHistOrderOnChangeEvent() {
+function addIsFromHistOrderOnChangeEvent(): void { 
     addListener("is-from-hist-order-checkbox-id", "change", function() {
         setIsFromHistOrderVisibility(this.checked);
     });
@@ -508,14 +535,14 @@ function addIsFromHistOrderOnChangeEvent() {
    parent - if defined then element with given id will be searched in this given container.
 
 */
-function addListener(elementId, eventName, eventFunction, parent) {
+function addListener(elementId: string, eventName: string, 
+    eventFunction: EventListenerOrEventListenerObject, parent?: HTMLElement): void { 
     if (typeof parent == "undefined") {
         document.getElementById(elementId).addEventListener(eventName, eventFunction);
     } else {
         parent.querySelector("#" + elementId).addEventListener(eventName, eventFunction);
     }
 }
-
 
 /* Fills "orders-container" div container with data.
    Based on selected team in "is-team-order-select" dropdown
@@ -524,13 +551,13 @@ function addListener(elementId, eventName, eventFunction, parent) {
    adds elements defined in "addOrderContainer" function.
 
 */
-function renderOrderContainer() {
+function renderOrderContainer(): void { 
     fillPeopleToOrderArray();
     removeChildNodes("orders-container");
     
-    var arrayLength = peopleToOrder.length;  
+    let arrayLength = peopleToOrder.length;  
 
-    for (var i = 0; i < arrayLength; i += 1) {
+    for (let i = 0; i < arrayLength; i += 1) {
         renderOrder(i, peopleToOrder[i]);
     }
 }
@@ -540,9 +567,9 @@ function renderOrderContainer() {
   and initialize their meals to order array.
 
 */
-function fillPeopleToOrderArray() {
-    var teamRef = getTeamsSelectValue();
-    var peopleRefArray = getArrayElement(teams, team => team.ref == teamRef).members;
+function fillPeopleToOrderArray(): void { 
+    let teamRef: number = parseInt(getTeamsSelectValue());
+    let peopleRefArray: number[] = getArrayElement(teams, team => team.ref == teamRef).members;
     peopleToOrder = [];
     peopleRefArray.forEach(function(personRef) {
         peopleToOrder.push({
@@ -555,8 +582,8 @@ function fillPeopleToOrderArray() {
 /* Removes all nested nodes of DOM element with given elementId.
 
 */
-function removeChildNodes(elementId) {
-    var parent = document.getElementById(elementId);
+function removeChildNodes(elementId: string): void { 
+    let parent: HTMLElement = document.getElementById(elementId);
     while (parent.lastChild) {
         parent.removeChild(parent.lastChild);
     }
@@ -571,46 +598,46 @@ function removeChildNodes(elementId) {
    that is most likely to be chosen).
 
 */
-function renderOrder(index, personOrder) {
-    var order = document.createDocumentFragment();
-    var orderContainerDiv = document.createElement("div");
-    var orderHeaderContainerDiv = document.createElement("div");
-    var orderHeaderXDiv = document.createElement("div");
-    var orderHeaderPersonDiv = document.createElement("div");
-    var orderHeaderPersonSelect = document.createElement("select");
-    var orderHeaderMealSetDiv = document.createElement("div");
-    var orderHeaderMealSetSelect = document.createElement("select");
-    var orderHeaderPriceDiv = document.createElement("div");
+function renderOrder(index: number, personOrder?: PersonOrder): void {
+    let order = document.createDocumentFragment();
+    let orderContainerDiv = document.createElement("div");
+    let orderHeaderContainerDiv = document.createElement("div");
+    let orderHeaderXDiv = document.createElement("div");
+    let orderHeaderPersonDiv = document.createElement("div");
+    let orderHeaderPersonSelect = document.createElement("select");
+    let orderHeaderMealSetDiv = document.createElement("div");
+    let orderHeaderMealSetSelect = document.createElement("select");
+    let orderHeaderPriceDiv = document.createElement("div");
     
-    var orderPosContainerDiv = document.createElement("div");
+    let orderPosContainerDiv = document.createElement("div");
 
     orderContainerDiv.className = "container subitem create-order order-container";
 
     orderHeaderContainerDiv.className = "container subsubitem create-order order-header-container";
 
     orderHeaderXDiv.className = "subsubsubitem create-order order-header-x";
-    orderHeaderXDiv.dataset.index = index;
+    orderHeaderXDiv.dataset.index = index.toString();
     
     orderHeaderXDiv.id = "order-header-x-" + index;
     orderHeaderXDiv.appendChild(document.createTextNode("X"));
     orderHeaderContainerDiv.appendChild(orderHeaderXDiv);
 
     orderHeaderPersonDiv.className = "subsubsubitem create-order order-header-person";
-    orderHeaderPersonSelect.dataset.index = index;
+    orderHeaderPersonSelect.dataset.index = index.toString();
     orderHeaderPersonSelect.id = "order-header-person-select-" + index;
     orderHeaderPersonSelect.name = "order-header-person-select";
     orderHeaderPersonDiv.appendChild(orderHeaderPersonSelect);
     orderHeaderContainerDiv.appendChild(orderHeaderPersonDiv);
 
     orderHeaderMealSetDiv.className = "subsubsubitem create-order order-header-mealset";
-    orderHeaderMealSetSelect.dataset.index = index;
+    orderHeaderMealSetSelect.dataset.index = index.toString();
     orderHeaderMealSetSelect.id = "order-header-mealset-select-" + index;
     orderHeaderMealSetSelect.name = "order-header-mealset-select";
     orderHeaderMealSetDiv.appendChild(orderHeaderMealSetSelect);
     orderHeaderContainerDiv.appendChild(orderHeaderMealSetDiv);
 
     orderHeaderPriceDiv.className = "subsubsubitem create-order order-header-price";
-    orderHeaderXDiv.dataset.index = index;
+    orderHeaderXDiv.dataset.index = index.toString();
     orderHeaderPriceDiv.id = "order-header-price-" + index;
     orderHeaderPriceDiv.appendChild(document.createTextNode("16,99"));
     orderHeaderContainerDiv.appendChild(orderHeaderPriceDiv);
@@ -618,17 +645,17 @@ function renderOrder(index, personOrder) {
     orderContainerDiv.appendChild(orderHeaderContainerDiv);
 
     orderPosContainerDiv.className = "container subsubitem create-order order-pos-container";
-    orderHeaderXDiv.dataset.index = index;
+    orderHeaderXDiv.dataset.index = index.toString();
     orderPosContainerDiv.id = "order-pos-container-" + index;
 
     orderContainerDiv.appendChild(orderPosContainerDiv);
 
     order.appendChild(orderContainerDiv);
-    document.getElementById("orders-container").appendChild(order);
+    (<HTMLDivElement>document.getElementById("orders-container")).appendChild(order);
 
     // After a person for this order item has been changed,
     // refill it's mealset dropdown and fire event upon this dropdown's change.
-    addListener(orderHeaderPersonSelect.id, "change", function(e) {
+    addListener(orderHeaderPersonSelect.id, "change", function() {
         fillMealSetSelectMenu(index, personOrder.person.ref);
         orderHeaderMealSetSelect.dispatchEvent(new Event('change'));
     });
@@ -636,9 +663,10 @@ function renderOrder(index, personOrder) {
     // After a mealset for a person's order item has been changed,
     // refill "meals" array of ""peopleToOrder" global array for that order item
     // and rerender order item's positions with meals.
-    addListener(orderHeaderMealSetSelect.id, "change", function(e) {
-        fillPeopleToOrderMealArray(e.target.dataset.index);
-        renderOrderPosContainer(e.target.dataset.index);
+    addListener(orderHeaderMealSetSelect.id, "change", function() {
+        let mealSetIndex: number = parseInt(orderHeaderMealSetSelect.dataset.index);
+        fillPeopleToOrderMealArray(mealSetIndex);
+        renderOrderPosContainer(mealSetIndex);
     });
 
     // If a person for which this order item we are creating is given,
@@ -661,13 +689,13 @@ function renderOrder(index, personOrder) {
     orderIndex - index of a order item.
   
  */
-function renderOrderPosContainer(orderIndex) {
-    var personMeals = peopleToOrder[orderIndex].meals;
-    var arrayLength = personMeals.length;
+function renderOrderPosContainer(orderIndex: number): void {
+    let personMeals: PersonOrderMeal[] = peopleToOrder[orderIndex].meals;
+    let arrayLength: number = personMeals.length;
 
     removeChildNodes("order-pos-container-" + orderIndex);
 
-    for (var i = 0; i < arrayLength; i += 1) {
+    for (let i = 0; i < arrayLength; i += 1) {
         renderOrderPosItem(orderIndex, i, personMeals[i]);
     }
 }
@@ -692,33 +720,27 @@ function renderOrderPosContainer(orderIndex) {
     It represents a meal of index "orderPosIndex" for order with index "orderIndex" 
     that is peopleToOrder[orderIndex].meals[orderPosIndex] element.
 */
-function renderOrderPosItem(orderIndex, orderPosIndex, orderPosMeal) {
+function renderOrderPosItem(orderIndex: number, orderPosIndex: number, 
+    orderPosMeal?: PersonOrderMeal): void {
     // Is the container for multiple "orderPosDiv" containers
-    let orderPosContainerDiv = document.getElementById("order-pos-container-" + orderIndex);
+    let orderPosContainerDiv: HTMLDivElement = <HTMLDivElement>document.getElementById("order-pos-container-" + orderIndex);
 
     // Is the container for all elements of a single order item's position.
     let orderPosDiv = document.createElement("div");
     // Container for elements that alows a usr to delete/create new position to order's item
     let orderPosXDiv = renderOrderPosXDiv(orderIndex, orderPosIndex);
+
     // Container for dropdown with meals.
-    let { 
-        divBlock: orderPosNameDiv, 
-        inner: orderPosNameSelect 
-    } = renderOrderPosNameDiv(orderIndex, orderPosIndex);
+    let orderPosNameSelect = renderOrderPosNameDiv(orderIndex, orderPosIndex);
+    let orderPosNameDiv: HTMLDivElement = <HTMLDivElement>orderPosNameSelect.parentElement;
 
     // Container for input that defines selected meal's quantity.
-    let { 
-        divBlock: orderPosQuantityDiv, 
-        inner: orderPosQuantityInput
-    } = renderOrderPosQuantityDiv(orderIndex, orderPosIndex);
+    let orderPosQuantityInput = renderOrderPosQuantityDiv(orderIndex, orderPosIndex);
+    let orderPosQuantityDiv: HTMLDivElement = <HTMLDivElement>orderPosQuantityInput.parentElement;
 
     // Container for label that shows the total price of created position.
-    let { 
-        divBlock: orderPosPriceDiv,
-        inner: orderPosPriceSpan 
-    } = renderOrderPosPriceDiv(orderIndex, orderPosIndex);
-    
-    document.createElement("div");
+    let orderPosPriceSpan = renderOrderPosPriceDiv(orderIndex, orderPosIndex);
+    let orderPosPriceDiv: HTMLDivElement = <HTMLDivElement>orderPosPriceSpan.parentElement;
     
     orderPosDiv.className = "container subsubsubitem create-order order-pos-item-container";
 
@@ -732,12 +754,12 @@ function renderOrderPosItem(orderIndex, orderPosIndex, orderPosMeal) {
     // If user changes a selected meal for order item's position
     // reset it's quantity to default value and trigger it's onChange event.
     addListener(orderPosNameSelect.id, "change", function() {
-        orderPosQuantityInput.value = 1;
+        orderPosQuantityInput.value = "1";
         orderPosQuantityInput.dispatchEvent(new Event('change'));
     });
 
     addListener(orderPosQuantityInput.id, "change", function() {
-        orderPosPriceSpan.innerText = (orderPosQuantityInput.value 
+        orderPosPriceSpan.innerText = (parseInt(orderPosQuantityInput.value) 
             * meals[getSelectValue(orderPosNameSelect.id)].price).toFixed(2);
     });
     
@@ -764,11 +786,11 @@ function renderOrderPosItem(orderIndex, orderPosIndex, orderPosMeal) {
     orderIndex - index of a order item,
     orderPosIndex - index of the order item's position.
 */
-function renderOrderPosXDiv(orderIndex, orderPosIndex) {
-    var div = document.createElement("div");
+function renderOrderPosXDiv(orderIndex: number, orderPosIndex: number): HTMLDivElement {
+    let div = document.createElement("div");
     div.className = "subsubsubitem create-order order-pos-x";
-    div.dataset.index = orderIndex;
-    div.dataset.subindex = orderPosIndex;
+    div.dataset.index = orderIndex.toString();
+    div.dataset.subindex = orderPosIndex.toString();
     div.id = "order-pos-x-" + orderIndex + "-" + orderPosIndex;
     div.appendChild(document.createTextNode("X pos"));
 
@@ -790,18 +812,18 @@ function renderOrderPosXDiv(orderIndex, orderPosIndex) {
     orderIndex - index of a order item,
     orderPosIndex - index of the order item's position.
 */
-function renderOrderPosNameDiv(orderIndex, orderPosIndex) {
+function renderOrderPosNameDiv(orderIndex: number, orderPosIndex: number): HTMLSelectElement {
     let div = document.createElement("div");
     let select = document.createElement("select");
     
     div.className = "subsubsubitem create-order order-pos-name";
-    select.dataset.index = orderIndex;
-    select.dataset.subindex = orderPosIndex;
+    select.dataset.index = orderIndex.toString();
+    select.dataset.subindex = orderPosIndex.toString();
     select.id = "order-pos-name-select-" + orderIndex + "-" + orderPosIndex;
     select.name = "order-pos-name-select";
     div.appendChild(select);  
 
-    return { divBlock: div, inner: select }; 
+    return select; 
 }
 
 /* It renders a DOM structure for new order's position for person
@@ -820,21 +842,21 @@ function renderOrderPosNameDiv(orderIndex, orderPosIndex) {
     orderIndex - index of a order item,
     orderPosIndex - index of the order item's position.
 */
-function renderOrderPosQuantityDiv(orderIndex, orderPosIndex) {       
+function renderOrderPosQuantityDiv(orderIndex: number, orderPosIndex: number): HTMLInputElement {
     let div = document.createElement("div");
     let input = document.createElement("input");
 
     div.className = "subsubsubitem create-order order-pos-quantity";
-    input.dataset.index = orderIndex;
-    input.dataset.subindex = orderPosIndex;
+    input.dataset.index = orderIndex.toString();
+    input.dataset.subindex = orderPosIndex.toString();
     input.id = "order-pos-quantity-input-" + orderIndex + "-" + orderPosIndex;
     input.name = "order-pos-quantity-input";
     input.type = "number";
-    input.min = 1;
-    input.value = 1;
+    input.min = "1";
+    input.value = "1";
     div.appendChild(input);
 
-    return { divBlock: div, inner: input }; 
+    return input; 
 }
 
 /* It renders a DOM structure for new order's position for person
@@ -854,15 +876,15 @@ function renderOrderPosQuantityDiv(orderIndex, orderPosIndex) {
     orderIndex - index of a order item,
     orderPosIndex - index of the order item's position.
 */
-function renderOrderPosPriceDiv(orderIndex, orderPosIndex) {
+function renderOrderPosPriceDiv(orderIndex: number, orderPosIndex: number): HTMLSpanElement {
     let div = document.createElement("div");
     let span = document.createElement("span");
 
     div.className = "subsubsubitem create-order order-pos-price";
-    span.dataset.index = orderIndex;
-    span.dataset.subindex = orderPosIndex;
+    span.dataset.index = orderIndex.toString();
+    span.dataset.subindex = orderPosIndex.toString();
     span.id = "order-pos-price-span" + orderIndex + "-" + orderPosIndex;
     div.appendChild(span);
 
-    return { divBlock: div, inner: span };
+    return span;
 }
