@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Node.js on Docker",
   "author": "Tomasz Strzałka <194238@student.pwr.wroc.pl>",
+  "repository": "https://github.com/PWrGitHub194238/sente-cash-flow",
+  "license": "MIT",
   "main": "./dist/index.js",
   "scripts": {
     "start": "supervisor ./dist/index.js"

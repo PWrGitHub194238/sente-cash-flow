@@ -6,3 +6,5 @@ docker/node.js/dist/
 docker/node.js/package-lock.json
 docker/node.js/Dockerfile
 docker/node.js/.dockerignore
+docker/jenkins/jenkins_home/
+docker/jenkins/Dockerfile
