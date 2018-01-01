@@ -1,6 +1,10 @@
 *.orig
-client/**/*.js
-client/**/*.map
+*.log
+client/src/**/*.js
+client/src/**/*.map
+client/node_modules/
+client/reports/test/reports/
+client/reports/test/screenshots/
 docker/node.js/node_modules/
 docker/node.js/dist/
 docker/node.js/package-lock.json
@@ -8,3 +12,5 @@ docker/node.js/Dockerfile
 docker/node.js/.dockerignore
 docker/jenkins/jenkins_home/
 docker/jenkins/Dockerfile
+client/test/reports/
+client/test/screenshots/
