@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha -r ts-node/register src/**/*.spec.ts",
-    "e2e": "nightwatch --config nightwatch.conf.js"
+    "e2e": "tsc -p . && nightwatch --config nightwatch.conf.js || true"
   },
   "repository": {
     "type": "git",
