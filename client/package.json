@@ -1,0 +1,31 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "desc",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p .",
+    "mocha": "tsc -p . && mocha -r ts-node/register src/**/*.spec.ts || true",
+    "e2e": "tsc -p . && nightwatch --config nightwatch.conf.js || true",
+    "mocha-to-xml": "tsc -p . && mocha -r ts-node/register src/**/*.spec.ts --reporter mocha-junit-reporter --reporter-options mochaFile=./test/reports/mocha/file.xml"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PWrGitHub194238/sente-cash-flow/tree/master/client"
+  },
+  "author": "Tomasz Strzałka",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chai": "^4.0.10",
+    "@types/mocha": "^2.2.45",
+    "@types/nightwatch": "^0.9.5",
+    "chai": "^4.1.2",
+    "chromedriver": "^2.34.0",
+    "mocha": "^4.1.0",
+    "mocha-junit-reporter": "^1.15.0",
+    "nightwatch": "^0.9.19",
+    "selenium-server": "^3.8.1",
+    "ts-node": "^4.1.0",
+    "typescript": "^2.6.2"
+  }
+}
