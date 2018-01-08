@@ -888,3 +888,13 @@ function renderOrderPosPriceDiv(orderIndex: number, orderPosIndex: number): HTML
 
     return span;
 }
+
+/* Constant that store references to all non-ui functions that can be tested 
+   by mocha unit testing framework. Many functions are reffering to 'document' variable
+   which is not avaliable at mocha's scope. All unit tests for this file are stored
+   in the index.spec.ts file.
+
+*/
+export const mochaTests = {
+    "getArrayElement": getArrayElement
+};

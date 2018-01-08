@@ -4,8 +4,10 @@
   "description": "desc",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -r ts-node/register src/**/*.spec.ts",
-    "e2e": "tsc -p . && nightwatch --config nightwatch.conf.js || true"
+    "build": "tsc -p .",
+    "mocha": "tsc -p . && mocha -r ts-node/register src/**/*.spec.ts || true",
+    "e2e": "tsc -p . && nightwatch --config nightwatch.conf.js || true",
+    "mocha-to-xml": "tsc -p . && mocha -r ts-node/register src/**/*.spec.ts --reporter mocha-junit-reporter --reporter-options mochaFile=./test/reports/mocha/file.xml"
   },
   "repository": {
     "type": "git",
@@ -20,6 +22,7 @@
     "chai": "^4.1.2",
     "chromedriver": "^2.34.0",
     "mocha": "^4.1.0",
+    "mocha-junit-reporter": "^1.15.0",
     "nightwatch": "^0.9.19",
     "selenium-server": "^3.8.1",
     "ts-node": "^4.1.0",

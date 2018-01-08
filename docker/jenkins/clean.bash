@@ -191,7 +191,7 @@ function cleanDir() {
   [ -e "${DOCKERFILE_PATH}" ] && rm "${DOCKERFILE_PATH}"
   
   echo "Removing content of output directory for project..."
-  [ -d jenkins_home ] && rm -fr jenkins_home/*
+  [ -d jenkins_home ] && rm -fr jenkins_home
   
   echo "Project has been cleaned."
 }
