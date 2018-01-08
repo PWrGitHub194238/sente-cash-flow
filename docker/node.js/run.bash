@@ -152,20 +152,37 @@ function startContainer {
 # and client side project with front-end content.
 #
 function complieProject {
-  local curdir="$(pwd)"
-  echo "Compiling TypeScript files for '${curdir}'..."
+  local clientDir="$( cd '../../client' && pwd )/"
+  local nodeDistDir="$( cd './dist/' && pwd )/"  
+  local nodeDir="$(pwd)"
   
-  tsc -p .
+  rm -rf "${nodeDistDir}"
+    
+  echo "Compiling TypeScript files for '${nodeDir}'..."
+  
+  tsc -p "${nodeDir}"
 
-  cd "../../client" 
-  echo "Compiling TypeScript files for '$(pwd)'..."
+  echo "Compiling TypeScript files for '${clientDir}'..."
   
-  tsc -p .
+  tsc -p "${clientDir}"
   
-  cd "${curdir}"
-  echo "Copying compiled files into output directory of the node;js server."
+  copyClient "${clientDir}" "${nodeDistDir}"
+}
+
+# Copies all files from working directory which contains client side related code
+# into directory which serves as output location for node.js web server's files.
+#
+# Parameters:
+# ${1} - directory for client side files,
+# ${2} - output directory for node.js server.
+#
+function copyClient() {
   
-  cp -r "../../client" "./dist/client"
+  echo -e "Copying compiled files from:\n\t${1}\n to the output directory of the node.js server:\n\t${2}."
+  
+  mkdir -p "${2}client/"
+  cp -r "${1}src/"* "${2}client/" -v
+  find "${2}" -type f -name "*.ts" -delete
 }
   
 ####################################################################################################################
