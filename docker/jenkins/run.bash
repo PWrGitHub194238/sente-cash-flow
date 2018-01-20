@@ -145,7 +145,12 @@ function startContainer {
   fi
   
   echo "Running a container..."
-  docker run -p "${2}:${2}" -v "$(pwd)/jenkins_home":"${3}" "${1}:${2}"
+  # In current version of Docker there is an issue with directory mapping 
+  # between Windows host and Linux-based virtual machine. If we add this mapping,
+  # we will encounter an error while creating symlinks inside docker
+  # and therefor we will not be able to install some necessary dependencies for Jenkins.
+  # -v "$(pwd)/jenkins_home":"${3}"
+  docker run -p "${2}:${2}"  "${1}:${2}"
 }
   
 ####################################################################################################################

@@ -9,7 +9,6 @@ client/test/reports/
 client/test/screenshots/
 docker/node.js/node_modules/
 docker/node.js/dist/
-docker/node.js/package-lock.json
 docker/node.js/Dockerfile
 docker/node.js/.dockerignore
 docker/jenkins/jenkins_home/

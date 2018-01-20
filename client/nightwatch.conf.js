@@ -26,14 +26,16 @@ module.exports = {
       "globals": {
         "waitForConditionTimeout": 5000 // sometimes internet is slow so wait.
       },
-      "desiredCapabilities": { // use Chrome as the default browser for tests
-        "browserName": "chrome"
-      }
-    },
-    "chrome": {
-      "desiredCapabilities": {
-        "browserName": "chrome",
-        "javascriptEnabled": true // turn off to test progressive enhancement
+      "desiredCapabilities" : {
+        "browserName" : "chrome",
+        "javascriptEnabled" : true,
+        "acceptSslCerts" : true,
+        "chromeOptions" : {
+          "args" : [
+            "--headless",
+            "--no-sandbox"
+          ]
+        }
       }
     }
   }
