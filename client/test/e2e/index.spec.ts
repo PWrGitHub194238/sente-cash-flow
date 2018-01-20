@@ -28,6 +28,8 @@ module.exports = {
 
   'Navigating to .\\createorder\\index.html site': function(browser: NightwatchAPI) {
     browser
+      .url(baseURL)
+      .waitForElementVisible('body')
       .click("body > a")
       .waitForElementVisible("#order-accept > button");
 

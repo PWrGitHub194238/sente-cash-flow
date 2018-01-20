@@ -145,7 +145,7 @@ function startContainer {
   fi
   
   echo "Running a container..."
-  docker run -p "${2}:${2}" -v "$(pwd)/dist":"${3}/dist" "${1}:${2}"
+  docker run -p "${2}:${2}" -v "$(pwd)/dist":"${3}dist" "${1}:${2}"
 }
 
 # Compiles TypeScipt projects that is: node.js project in this directory
@@ -160,13 +160,15 @@ function complieProject {
     
   echo "Compiling TypeScript files for '${nodeDir}'..."
   
-  tsc -p "${nodeDir}"
+  cd "${nodeDir}" && npm run build
 
   echo "Compiling TypeScript files for '${clientDir}'..."
   
-  tsc -p "${clientDir}"
+  cd "${clientDir}" && npm run build
   
   copyClient "${clientDir}" "${nodeDistDir}"
+  
+  cd "${nodeDir}"
 }
 
 # Copies all files from working directory which contains client side related code

@@ -101,7 +101,8 @@ function attachToContainer {
   if [ -n "${container_id}" ]
   then
     echo "Container with ID '${container_id}' was found. Attempting to attach..."
-    docker exec -it "${container_id}" /bin/bash
+    # Run as root
+    docker exec -it --user root "${container_id}" /bin/bash
   else
     echo "Cannot found any container with name '${1}' on port '${2}'."
   fi
