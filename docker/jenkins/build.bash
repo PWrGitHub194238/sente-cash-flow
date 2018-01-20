@@ -116,6 +116,26 @@ function createDocker() {
   # Create working directory for application and change directory to it.
   echo "WORKDIR ${4}" >> "${1}"
   
+  # Change user to root with elevated privileges
+  echo 'USER root' >> "${1}"
+  
+  # Installs necessary libraries in order to run Selenium's ChromeDriver 
+  # along with Chrome in headless mode inside Docker.
+  echo 'RUN apt-get update && apt-get install -y \
+    libgconf-2-4 \
+    libxss1 \
+    libappindicator1 \
+    libindicator7 \' >> "${1}"
+    
+  # Downloads Chrome stable build
+  echo '&& wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \' >> "${1}"
+  
+  # Install Chrome on virtual machine.
+  echo '&& dpkg -i google-chrome*.deb \' >> "${1}"
+  
+  # Resolve dependencies issues.
+  echo '|| apt-get install -f -y ' >> "${1}"
+  
   # Add listener for given port. It allows user to communicate with Docker's VM on this port.
   echo "EXPOSE ${5}" >> "${1}"
 }
