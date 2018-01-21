@@ -28,5 +28,8 @@
     "selenium-server": "^3.8.1",
     "ts-node": "^4.1.0",
     "typescript": "^2.6.2"
+  },
+  "dependencies": {
+    "commonjs": "0.0.1"
   }
 }
