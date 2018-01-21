@@ -1,5 +1,3 @@
-'use strict';
-
 /* Array of objects that keeps tacking all changes in createOrderForm.
    It consists of elements that each represent a single person's order,
    each person might have many meals that he/she wants to order, 
@@ -160,6 +158,7 @@ function fillSelectMenus(): void {
    For each element of given array it creates an option which "value" attribute 
    and inner text of <option> element are determinated by given callbacks.
    It appends all generated options to element with given id as children.
+   Before that, all child nodes of that element are removed.
 
    elementId - id for <select> tag to which we want to add new <option> elements,
    array - each element from array will be added as separated <option> for given dropdown,
@@ -170,14 +169,27 @@ function fillSelectMenus(): void {
 */
 function fillSelectMenu(elementId: string, array: any[], 
     keyFunc: (any) => string, valueFunc: (any) => string): void {
+    let select: HTMLSelectElement = <HTMLSelectElement>document.getElementById(elementId);
     let options: DocumentFragment = document.createDocumentFragment();
     array.forEach(function(item: any) {
-        let option: HTMLOptionElement = document.createElement("option");
-        option.value = keyFunc(item);
-        option.appendChild(document.createTextNode(valueFunc(item)));
-        options.appendChild(option);
+        addSelectMenuOption(options, keyFunc(item), valueFunc(item));    
     });
-    (<HTMLSelectElement>document.getElementById(elementId)).appendChild(options);
+    removeChildNodes(elementId);
+    select.appendChild(options);
+}
+
+/* Append an <option> item to given options list.
+
+   options - DOM fragment containing list of all options for some <select> node,
+   key - value (index) for an <option> node that will be added,
+   value - text to be displayed for given option (options[key] = value).
+
+*/
+function addSelectMenuOption(options: DocumentFragment, key: string, value: string): void {
+    let option: HTMLOptionElement = document.createElement("option");
+    option.value = key;
+    option.appendChild(document.createTextNode(value));
+    options.appendChild(option);
 }
 
 /* Sets an element from given array as selected option for dropdown with given id.
