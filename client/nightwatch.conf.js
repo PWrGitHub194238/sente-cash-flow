@@ -32,6 +32,24 @@ module.exports = {
         "acceptSslCerts" : true,
         "chromeOptions" : {
           "args" : [
+          ]
+        }
+      }
+    },
+    "headless": {
+      "screenshots": {
+        "enabled": true, // if you want to keep screenshots
+        "path": SCREENSHOT_PATH // save screenshots here
+      },
+      "globals": {
+        "waitForConditionTimeout": 5000 // sometimes internet is slow so wait.
+      },
+      "desiredCapabilities" : {
+        "browserName" : "chrome",
+        "javascriptEnabled" : true,
+        "acceptSslCerts" : true,
+        "chromeOptions" : {
+          "args" : [
             "--headless",
             "--no-sandbox"
           ]
