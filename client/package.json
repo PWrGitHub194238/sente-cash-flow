@@ -6,8 +6,8 @@
   "scripts": {
     "build": "tsc -p .",
     "mocha": "tsc -p . && mocha -r ts-node/register src/**/*.spec.ts || true",
-    "e2e": "tsc -p . && nightwatch --config nightwatch.conf.js || true",
     "mocha-to-xml": "tsc -p . && mocha -r ts-node/register src/**/*.spec.ts --reporter mocha-junit-reporter --reporter-options mochaFile=./test/reports/mocha/file.xml"
+    "e2e": "nightwatch --config nightwatch.conf.js --env headless || true",
   },
   "repository": {
     "type": "git",
