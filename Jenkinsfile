@@ -14,6 +14,7 @@ pipeline {
         dir(path: './client/') {
           sh 'echo "$(pwd)"'
           sh 'npm install'
+          sh 'npm run build'
         } 
       }
     }  

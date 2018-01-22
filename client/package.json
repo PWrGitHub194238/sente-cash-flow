@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc -p .",
-    "mocha": "tsc -p . && mocha -r ts-node/register src/**/*.spec.ts || true",
-    "mocha-to-xml": "tsc -p . && mocha -r ts-node/register src/**/*.spec.ts --reporter mocha-junit-reporter --reporter-options mochaFile=./test/reports/mocha/file.xml"
+    "mocha": "mocha -r ts-node/register src/**/*.spec.ts || true",
+    "e2e-build": "find ./test/e2e/ -name \"*.ts\" -type f | tsc",
     "e2e": "nightwatch --config nightwatch.conf.js --env headless || true",
+    "mocha-to-xml": "mocha -r ts-node/register src/**/*.spec.ts --reporter mocha-junit-reporter --reporter-options mochaFile=./test/reports/mocha/file.xml"
   },
   "repository": {
     "type": "git",
